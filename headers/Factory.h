@@ -1,5 +1,5 @@
 #include <iostream>
-#include "Encja.h"
+#include "Reference.h"
 #include "Exeptions.h"
 #pragma once
 
@@ -8,7 +8,7 @@ class Factory
 {
 	public:
 		Factory ();
-		Encja<Type> createNewReference(...){ throw new FactoryImplemented();}
+		Reference<Type> createNewReference(...){ throw new FactoryImplemented();}
 		virtual ~Factory ();
 
 	private:

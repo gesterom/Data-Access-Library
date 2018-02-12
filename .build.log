@@ -1,0 +1,11 @@
+ 
+src/main.cpp: In function ‘int main(int, char**)’:
+src/main.cpp:11:37: error: ‘& mmm’ is not a valid template argument of type ‘const char*’ because ‘mmm’ has no linkage
+  throw new funcIsnotImplemented<&mmm>();
+                                     ^
+src/main.cpp:8:15: warning: unused parameter ‘argv’ [-Wunused-parameter]
+ int main( int argv, char** args ) {
+               ^~~~
+src/main.cpp:8:28: warning: unused parameter ‘args’ [-Wunused-parameter]
+ int main( int argv, char** args ) {
+                            ^~~~
