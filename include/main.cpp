@@ -1,6 +1,6 @@
 #include <iostream>
-#include "../include/Reference.h"
-#include "../include/Hash.h"
+#include "Reference.h"
+#include "Hash.h"
 
 int main(int argv, char** args){
 	Loader<int> l;

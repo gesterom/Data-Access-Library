@@ -1,11 +1,16 @@
  
 src/main.cpp: In function ‘int main(int, char**)’:
-src/main.cpp:11:37: error: ‘& mmm’ is not a valid template argument of type ‘const char*’ because ‘mmm’ has no linkage
-  throw new funcIsnotImplemented<&mmm>();
-                                     ^
-src/main.cpp:8:15: warning: unused parameter ‘argv’ [-Wunused-parameter]
- int main( int argv, char** args ) {
-               ^~~~
-src/main.cpp:8:28: warning: unused parameter ‘args’ [-Wunused-parameter]
- int main( int argv, char** args ) {
-                            ^~~~
+src/main.cpp:5:14: warning: unused parameter ‘argv’ [-Wunused-parameter]
+ int main(int argv, char** args){
+              ^~~~
+src/main.cpp:5:27: warning: unused parameter ‘args’ [-Wunused-parameter]
+ int main(int argv, char** args){
+                           ^~~~
+In file included from src/../include/Reference.h:4:0,
+                 from src/main.cpp:2:
+src/../include/Manager.h: In instantiation of ‘Object<Type>* Manager<Type>::getObject(Loader<Type>*) [with Type = int]’:
+src/../include/Reference.h:13:16:   required from ‘Reference<Type>::operator Type&() [with Type = int]’
+src/main.cpp:14:12:   required from here
+src/../include/Manager.h:12:42: warning: unused parameter ‘loader’ [-Wunused-parameter]
+  Object<Type> * getObject(Loader<Type> * loader){
+                                          ^~~~~~
