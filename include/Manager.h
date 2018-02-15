@@ -10,9 +10,14 @@ class Manager final{
 	public:
 	Manager(){}
 	Object<Type> * getObject(Loader<Type> * loader){
-		throw new NotImplemented("Manager");
+		auto it = map.find(*loader);
+		if(it==map.end()){
+			std::cout<<"empty?\n";
+			map[*loader] = new Object<Type>();
+		}
+		return map[*loader];
 	}
 	virtual ~Manager(){}
 	private:
-	std::unordered_map< Loader<Type> , Object<Type>* , LoaderHasher<Type> > map;
+	std::unordered_map< Loader<Type> , Object<Type>* , LoaderHasher<Type>> map;
 };

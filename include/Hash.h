@@ -1,27 +1,9 @@
 #pragma once
 #include <functional>
-#include <cstring>
 #include <string>
-#include <iostream>
-#include <stdint.h>
 
 #include "Loader.h"
-
-std::string getHex(uint8_t v){
-	char tabel[] = "0123456789ABCDEF";
-	std::string ret;
-	ret = tabel[v>>4];
-	ret+= tabel[v%16];
-	return ret;
-}
-
-std::string ptrToString(char * ptr , int size){
-	std::string ret;
-	for(int i=0;i<size;i++){
-		ret += getHex((uint8_t)ptr[i]);
-	}
-	return ret;
-}
+#include "ByteOperations.h"
 
 template<typename Type>
 class LoaderHasher{

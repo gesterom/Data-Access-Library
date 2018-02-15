@@ -8,13 +8,14 @@ class Loader <int> {
 	int alabama;
 	public:
 	Loader(){
-		value= 0x12345678;
+		value= 0x01234567;
 		//DBG(value);
-		alabama= 0xfedcba9;
+		alabama= 0xfedcba98;
 		//DBG(alabama);
 	}
 	int * load(){return &value;}
 };
+
 template <>
 class Loader <char> {
 	int value;
