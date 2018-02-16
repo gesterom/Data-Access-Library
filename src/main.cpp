@@ -3,22 +3,13 @@
 #include "../include/Hash.h"
 
 int main(int argv, char** args){
-	Loader<int> l;
-	Reference<int> ref(&l);
-	LoaderHasher<int> hs;
-	std::cout<<hs(l)<<std::endl;
-	Loader<char> c;
-	LoaderHasher<char> hc;
-	std::cout<<hc(c)<<std::endl;
-	try{
+	std::cout<<"===================================================="<<std::endl;
+	Loader<int> * l = new Loader<int>();
+	std::cout<<"===================================================="<<std::endl;
+	Reference<int> ref(l);
+	std::cout<<"===================================================="<<std::endl;
 	std::cin>>ref;
-	std::cout<<ref;
-	}
-	catch(NotImplemented * n){
-		std::cout<<n->get()<<std::endl;
-	}
-	//for(int i=0;i<argv;i++)
-	//std::cout<<args[i]<<std::endl;
-	
-	return 0;
+	std::cout<<"===================================================="<<std::endl;
+	std::cout<<ref<<std::endl;	
+	std::cout<<"===================================================="<<std::endl;
 }

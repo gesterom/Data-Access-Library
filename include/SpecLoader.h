@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ByteOperations.h"
 
 #define DBG(x) {std::cout<<#x<<"\t["<<x<<"]\n";}
 
@@ -8,12 +9,21 @@ class Loader <int> {
 	int alabama;
 	public:
 	Loader(){
-		value= 0x01234567;
+		std::cout<<"Loader crt"<<std::endl;
+		value= 0x67452301;
 		//DBG(value);
-		alabama= 0xfedcba98;
+		alabama= 0xefcdab89;
 		//DBG(alabama);
 	}
-	int * load(){return &value;}
+	int * load(){
+	std::cout<<"Loader load uesed"<<std::endl;
+	std::cout<<"000 : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
+	std::cout<<value<<" < value "<<std::endl;
+	return new int;
+	}
+	~Loader(){
+		std::cout<<"@@@ : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
+	}
 };
 
 template <>

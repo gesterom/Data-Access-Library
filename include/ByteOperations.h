@@ -26,7 +26,8 @@ bool hardByteEqual(char * left,char * right, uint64_t size){
 	char * rptr = new char[size];
 	memcpy(rptr,right,size);
 	std::string sright = ptrToString(rptr,size);
-	
+	delete[] rptr;
+	delete[] lptr;
 	return sleft==sright;
 
 }

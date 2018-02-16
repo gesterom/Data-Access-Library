@@ -6,3 +6,10 @@ src/main.cpp:5:14: warning: unused parameter ‘argv’ [-Wunused-parameter]
 src/main.cpp:5:27: warning: unused parameter ‘args’ [-Wunused-parameter]
  int main(int argv, char** args){
                            ^~~~
+In file included from src/../include/Reference.h:4:0,
+                 from src/main.cpp:2:
+src/../include/Manager.h: In instantiation of ‘void Manager<Type>::decrementReferenceNumber(Loader<Type>&) [with Type = int]’:
+src/../include/Reference.h:33:3:   required from ‘Reference<Type>::~Reference() [with Type = int]’
+src/main.cpp:9:22:   required from here
+src/../include/Manager.h:43:17: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+    for(int i=0;i<map.size();i++){

@@ -34,5 +34,5 @@ test:
 	echo $(CXXLIBS)
 	
 rebuild:
-	rm ./obj/*
+	rm ./obj/* || true
 	@$(MAKE) --no-print-directory post-build
