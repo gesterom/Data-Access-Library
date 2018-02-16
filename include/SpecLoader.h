@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ByteOperations.h"
 
-#define DBG(x) {std::cout<<#x<<"\t["<<x<<"]\n";}
+#define DBG(x) {//std::cout<<#x<<"\t["<<x<<"]\n";}
 
 template <>
 class Loader <int> {
@@ -9,20 +9,20 @@ class Loader <int> {
 	int alabama;
 	public:
 	Loader(){
-		std::cout<<"Loader crt"<<std::endl;
+		//std::cout<<"Loader crt"<<std::endl;
 		value= 0x67452301;
 		//DBG(value);
 		alabama= 0xefcdab89;
 		//DBG(alabama);
 	}
 	int * load(){
-	std::cout<<"Loader load uesed"<<std::endl;
-	std::cout<<"000 : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
-	std::cout<<value<<" < value "<<std::endl;
+	//std::cout<<"Loader load uesed"<<std::endl;
+	//std::cout<<"000 : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
+	//std::cout<<value<<" < value "<<std::endl;
 	return new int;
 	}
 	~Loader(){
-		std::cout<<"@@@ : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
+		//std::cout<<"@@@ : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
 	}
 };
 

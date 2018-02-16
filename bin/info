@@ -1,6 +1,6 @@
 ./src/main.cpp
 ./obj/main.o
-Compilation date : pią, 16 lut 2018, 17:11:36 CET
+Compilation date : pią, 16 lut 2018, 20:37:24 CET
 Flags list: -Wall -Wextra -Wunused-variable
 File list: ./src/main.cpp
 Lib list: 

@@ -30,10 +30,10 @@ class Object final{
 		data=dataPtr;
 	}
 	Type& get(){
-		std::cout<<"object->get()\n";
+		//std::cout<<"object->get()\n";
 		if(not loaded) { throw new NullReferenceExeption();}
 		m.lock();
-		std::cout<<"ret obj get\n";
+		//std::cout<<"ret obj get\n";
 		return *data;
 	}
 };
