@@ -7,7 +7,7 @@ int func1(){
 	try{
 		DAL::ILoader<int> * l = new Loader<int>();
 		DAL::Reference<int> ref(l);
-
+		ref=15;
 		std::cout<<"func 1:) I hava a obj :) ref = "<<ref<<std::endl;
 		std::cout<<"func 1: i wait"<<std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -23,8 +23,8 @@ int func2(){
 	try{
 		DAL::ILoader<int> * l = new Loader<int>();
 		DAL::Reference<int> ref(l);
-
-		std::cout<<"func1 and func 2 have the same loader so Reference<int> points the same int"<<std::endl;
+		ref+=255;
+		std::cout<<"func1 and func2 have the same loader so Reference<int> points the same int"<<std::endl;
 		std::cout<<"func 2:) I hava a obj :) ref = "<<ref<<std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		return 0;

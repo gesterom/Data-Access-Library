@@ -5,7 +5,6 @@ class Reference final{
 	public:
 	Reference(ILoader<Type> * loader);
 	operator Type&() ;
-	void operator=(const Type & data);
 	~Reference();
 	private:
 	Object<Type> * object;
