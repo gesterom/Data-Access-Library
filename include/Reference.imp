@@ -1,0 +1,23 @@
+//imp
+template<typename Type>
+Reference<Type>::~Reference(){
+	if(used){
+		object->unlockMutex();
+	}
+	manager.decrementReferenceNumber(*loader);
+	delete loader;
+}
+template<typename Type>
+Reference<Type>::operator Type&() {
+	if(not used){
+		used=true;
+		this->object = manager.getObject(*this->loader);
+	}
+	return this->object->get();
+}
+
+template<typename Type>
+Reference<Type>::Reference(Loader<Type> * loader){
+	this->loader = loader;
+	this->manager.incrementReferenceNumber(*loader);
+}

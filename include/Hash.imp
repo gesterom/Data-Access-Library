@@ -1,0 +1,10 @@
+//imp
+template<typename Type>
+std::size_t LoaderHasher<Type>::operator() (Loader<Type> const & l) const{
+	char * ptr = new char[sizeof(Loader<Type>)];
+	memcpy(ptr,&l,sizeof(Loader<Type>));
+	std::string ret = ptrToString(ptr,sizeof(Loader<Type>));
+	delete[] ptr;
+	size_t r = std::hash<std::string>{}(ret);
+	return r;
+}

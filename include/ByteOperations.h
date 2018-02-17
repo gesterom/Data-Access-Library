@@ -1,7 +1,4 @@
 #pragma once
-#include <stdint.h>
-#include <cstring>
-#include <string>
 
 std::string getHex(uint8_t v){
 	char tabel[] = "0123456789ABCDEF";
@@ -29,6 +26,5 @@ bool hardByteEqual(char * left,char * right, uint64_t size){
 	delete[] rptr;
 	delete[] lptr;
 	return sleft==sright;
-
 }
 

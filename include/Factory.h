@@ -1,5 +1,4 @@
 #pragma once
-#include "Exeptions.h"
 
 template<typename Type>
 class Factory{

@@ -1,15 +1,10 @@
 #include <iostream>
-#include "../include/Reference.h"
-#include "../include/Hash.h"
+#define SPECIALIZED_LOADERS_HEADER "../include/SpecLoader.h"
+#include "../include/DAL.h"
 
 int main(int argv, char** args){
-	//std::cout<<"===================================================="<<std::endl;
-	Loader<int> * l = new Loader<int>();
-	//std::cout<<"===================================================="<<std::endl;
-	Reference<int> ref(l);
-	//std::cout<<"===================================================="<<std::endl;
+	DAL::Loader<int> * l = new DAL::Loader<int>();
+	DAL::Reference<int> ref(l);
 	std::cin>>ref;
-	//std::cout<<"===================================================="<<std::endl;
-	std::cout<<ref<<std::endl;	
-	//std::cout<<"===================================================="<<std::endl;
+	std::cout<<ref<<std::endl;
 }

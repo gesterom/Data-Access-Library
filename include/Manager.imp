@@ -1,0 +1,36 @@
+//imp
+template<typename Type>
+void Manager<Type>::decrementReferenceNumber(Loader<Type> & loader){
+	auto it = map.find(loader);
+	if(it==map.end()){
+		for(int i=0;i<map.size();i++){
+		}
+		throw new ThisIsNotPossible("Manager = decrementReferenceNumber");
+	}
+	if(map[loader]->decrementReferenceNumber()==0){
+		delete map[loader];
+	}
+	
+}
+template<typename Type>
+void Manager<Type>::incrementReferenceNumber(Loader<Type> & loader){
+	auto it = map.find(loader);
+	if(it==map.end()){
+		map[loader] = new Object<Type>();
+	}
+	it = map.find(loader);
+	if(it!=map.end()){
+	}
+	map[loader]->incrementReferenceNumber();
+}
+template<typename Type>
+Object<Type> * Manager<Type>::getObject(Loader<Type> & loader){
+	auto it = map.find(loader);
+	if(it==map.end()){
+		throw new ThisIsNotPossible("getObject");
+	}
+	if(not map[loader]->isLoaded()){
+		map[loader]->setRawPointer(loader.load());
+	}
+	return map[loader];
+}

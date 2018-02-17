@@ -1,7 +1,4 @@
-#include <iostream>
-#include "ByteOperations.h"
-
-#define DBG(x) {//std::cout<<#x<<"\t["<<x<<"]\n";}
+#pragma once
 
 template <>
 class Loader <int> {
@@ -22,7 +19,6 @@ class Loader <int> {
 	return new int;
 	}
 	~Loader(){
-		//std::cout<<"@@@ : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
 	}
 };
 
