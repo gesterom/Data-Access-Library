@@ -1,34 +1,31 @@
 //imp
 template<typename Type>
 void Manager<Type>::decrementReferenceNumber(ILoader<Type> & loader){
-	auto it = map.find(loader);
+	auto it = map.find(loader.toString());
 	if(it==map.end()){
 		throw new ThisIsNotPossible("Manager = decrementReferenceNumber");
 	}
-	if(map[loader]->decrementReferenceNumber()==0){
-		delete map[loader];
+	if(map[loader.toString()]->decrementReferenceNumber()==0){
+		delete map[loader.toString()];
 	}
 	
 }
 template<typename Type>
 void Manager<Type>::incrementReferenceNumber(ILoader<Type> & loader){
-	auto it = map.find(loader);
+	auto it = map.find(loader.toString());
 	if(it==map.end()){
-		map[loader] = new Object<Type>();
+		map[loader.toString()] = new Object<Type>();
 	}
-	it = map.find(loader);
-	if(it!=map.end()){
-	}
-	map[loader]->incrementReferenceNumber();
+	map[loader.toString()]->incrementReferenceNumber();
 }
 template<typename Type>
 Object<Type> * Manager<Type>::getObject(ILoader<Type> & loader){
-	auto it = map.find(loader);
+	auto it = map.find(loader.toString());
 	if(it==map.end()){
 		throw new ThisIsNotPossible("getObject");
 	}
-	if(not map[loader]->isLoaded()){
-		map[loader]->setRawPointer(loader.load());
+	if(not map[loader.toString()]->isLoaded()){
+		map[loader.toString()]->setRawPointer(loader.load());
 	}
-	return map[loader];
+	return map[loader.toString()];
 }

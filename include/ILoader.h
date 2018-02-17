@@ -4,10 +4,7 @@ template<typename Type>
 class ILoader{
 	public:
 	ILoader(){}
-	virtual Type * load(){
-		std::string error = "Loader<";
-		error = error + typeid(Type).name()+"> is not implmented. load()";
-		throw new NotImplemented(error);
-	}
+	virtual Type * load()=0;
+	virtual std::string toString()=0;
 	virtual ~ILoader(){}
 };

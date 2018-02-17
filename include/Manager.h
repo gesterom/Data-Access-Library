@@ -9,5 +9,5 @@ class Manager final{
 	void decrementReferenceNumber(ILoader<Type> & loader);
 	virtual ~Manager(){}
 	private:
-	std::unordered_map< ILoader<Type> , Object<Type>* , LoaderHasher<Type>> map;
+	std::unordered_map< std::string , Object<Type>* > map;
 };

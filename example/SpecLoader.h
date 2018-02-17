@@ -22,6 +22,9 @@ class Loader <int> : public DAL::ILoader<int>
 		alabama= 0xefcdab89;
 	}
 	virtual int * load() override {return new int;}
+	virtual std::string toString() override {
+		return "0";
+	}
 	~Loader(){
 	}
 };
