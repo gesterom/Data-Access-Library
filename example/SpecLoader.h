@@ -12,7 +12,8 @@ class Loader : public DAL::ILoader<Type>
 };
 
 template <>
-class Loader <int> {
+class Loader <int> : public DAL::ILoader<int>
+{
 	int value;
 	int alabama;
 	public:
@@ -20,7 +21,7 @@ class Loader <int> {
 		value= 0x67452301;
 		alabama= 0xefcdab89;
 	}
-	virtual int * load(){return new int;}
+	virtual int * load() override {return new int;}
 	~Loader(){
 	}
 };
