@@ -1,8 +1,8 @@
 #pragma once
 
 template<typename Type>
-class Factory{
+class IFactory{
 	public:
-	Reference<Type> createNewReferenc(...){throw new NotImplemented("Factory");};
-	Factory(); //FIXME ?
+	Reference<Type> createNewReferenc(...)=0;
+	IFactory(); //FIXME ?
 };

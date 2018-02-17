@@ -1,10 +1,11 @@
 SOURCE := $(shell ls ./example/*.cpp)
 TARGET_EXEC :=./$(addprefix bin/,$(notdir $(SOURCE:.cpp=.out)))
+ZZZ = ""
 
-CXX=g++-7
+CXX=g++ -std=c++17
 CXXFLAGS=-Wall -Wextra -Wunused-variable
 
-CXXLIBS=$(shell cat ./libs)
+CXXLIBS=-lpthread
 
 .PHONY: all clean
 
@@ -20,8 +21,10 @@ post-build: main-build
 main-build: pre-build
 	@$(MAKE) --no-print-directory $(TARGET_EXEC)
 
-$(TARGET_EXEC): $(SOURCE)
-	$(CXX) $(CXXFLAGS) $< -o $@ $(CXXLIBS)
+$(TARGET_EXEC) : $(SOURCE)
+	$(eval TMP := $(shell ls ./$(addprefix example/,$(notdir $(@:.out=.cpp)))))
+	@echo $(TMP)
+	@$(CXX) $(CXXFLAGS) $(TMP) -o $@ $(CXXLIBS)
 
 rebuild:
 	rm ./bin/* || true

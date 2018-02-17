@@ -7,6 +7,8 @@ void Manager<Type>::decrementReferenceNumber(ILoader<Type> & loader){
 	}
 	if(map[loader.toString()]->decrementReferenceNumber()==0){
 		delete map[loader.toString()];
+		it = map.find(loader.toString());
+		map.erase(it);
 	}
 	
 }
@@ -27,5 +29,6 @@ Object<Type> * Manager<Type>::getObject(ILoader<Type> & loader){
 	if(not map[loader.toString()]->isLoaded()){
 		map[loader.toString()]->setRawPointer(loader.load());
 	}
+	DBG(map.size();std::cout<<map.size()<<std::endl;);
 	return map[loader.toString()];
 }

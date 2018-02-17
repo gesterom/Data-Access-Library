@@ -1,17 +1,22 @@
 //imp
+#define DBG(x) {std::cout<<std::this_thread::get_id()<<"\t["<<__FUNCTION__<<" , "<<__LINE__<<" ] \t"<<#x<<std::endl;{x;};}
 template<typename Type>
 Reference<Type>::~Reference(){
 	if(used){
-		object->unlockMutex();
+		DBG(object->unlockMutex());
 	}
-	manager.decrementReferenceNumber(*loader);
+	DBG(mMag.lock());
+	DBG(manager.decrementReferenceNumber(*loader););
+	DBG(mMag.unlock());
 	delete loader;
 }
 template<typename Type>
 Reference<Type>::operator Type&() {
 	if(not used){
 		used=true;
-		this->object = manager.getObject(*this->loader);
+		DBG(mMag.lock());
+		DBG(this->object = manager.getObject(*this->loader));
+		DBG(mMag.unlock());
 	}
 	return this->object->get();
 }
@@ -19,5 +24,19 @@ Reference<Type>::operator Type&() {
 template<typename Type>
 Reference<Type>::Reference(ILoader<Type> * loader){
 	this->loader = loader;
-	this->manager.incrementReferenceNumber(*loader);
+	DBG(mMag.lock());
+	DBG(this->manager.incrementReferenceNumber(*loader));
+	DBG(mMag.unlock());
+}
+
+
+template<typename Type>
+void Reference<Type>::operator=(const Type & data){
+	if(not used){
+		used=true;
+		DBG(mMag.lock());
+		DBG(this->object = manager.getObject(*this->loader));
+		DBG(mMag.unlock());
+	}
+	this->object->get()=data;
 }

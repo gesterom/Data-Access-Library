@@ -17,6 +17,8 @@ template<typename Type>
 void Object<Type>::unlockMutex(){
 	if(not loaded) 
 		throw new ThisIsNotPossible("unlockMutex");
+	if(referenceNumber==0)
+		throw new ThisIsNotPossible("NullReference");
 	m.unlock();
 }
 template<typename Type>
