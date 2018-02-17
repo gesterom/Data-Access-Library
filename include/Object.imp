@@ -1,10 +1,8 @@
 //imp
 template<typename Type>
 Type& Object<Type>::get(){
-		//std::cout<<"object->get()\n";
 		if(not loaded) { throw new NullReferenceException();}
 		m.lock();
-		//std::cout<<"ret obj get\n";
 		return *data;
 }
 template<typename Type>

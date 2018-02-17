@@ -1,17 +1,17 @@
 #pragma once
 
 template<typename Type>
-class Loader final{
+class ILoader{
 	public:
-	Loader(){
+	ILoader(){
 		std::string error = "Loader<";
 		error = error + typeid(Type).name()+"> is not implmented. constructor()";
 		throw new NotImplemented(error);
 	}
-	Type * load(){
+	virtual Type * load(){
 		std::string error = "Loader<";
 		error = error + typeid(Type).name()+"> is not implmented. load()";
 		throw new NotImplemented(error);
 	}
-	~Loader(){}
+	virtual ~ILoader(){}
 };

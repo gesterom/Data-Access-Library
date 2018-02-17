@@ -1,4 +1,15 @@
 #pragma once
+#include "../include/DAL.h"
+
+template <typename Type>
+class Loader : public DAL::ILoader<Type>
+{
+	public:
+	Loader(){}
+	virtual Type* load() override{
+		throw new int;
+	}
+};
 
 template <>
 class Loader <int> {
@@ -6,18 +17,10 @@ class Loader <int> {
 	int alabama;
 	public:
 	Loader(){
-		//std::cout<<"Loader crt"<<std::endl;
 		value= 0x67452301;
-		//DBG(value);
 		alabama= 0xefcdab89;
-		//DBG(alabama);
 	}
-	int * load(){
-	//std::cout<<"Loader load uesed"<<std::endl;
-	//std::cout<<"000 : loader mem [ "<<ptrToString((char*)this,sizeof(Loader<int>))<<" ]"<<std::endl;
-	//std::cout<<value<<" < value "<<std::endl;
-	return new int;
-	}
+	virtual int * load(){return new int;}
 	~Loader(){
 	}
 };
@@ -29,9 +32,7 @@ class Loader <char> {
 	public:
 	Loader(){
 		value= 0x12345678;
-		//DBG(value);
 		a= 0x42;
-		//DBG(a);
 	}
-	int * load(){return &value;}
+	virtual char * load(){return new char;}
 };

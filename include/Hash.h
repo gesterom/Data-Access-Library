@@ -4,6 +4,6 @@ template<typename Type>
 class LoaderHasher{
 	public:
 	LoaderHasher(){}
-	std::size_t operator() (Loader<Type> const & l) const;
+	std::size_t operator() (ILoader<Type> const & l) const;
 
 };

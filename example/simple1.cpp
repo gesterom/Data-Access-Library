@@ -1,11 +1,10 @@
 #include <iostream>
 
-#define SPECIALIZED_LOADERS_HEADER "SpecLoader.h"
-
 #include "../include/DAL.h"
+#include "SpecLoader.h"
 
 int main(){
-	DAL::Loader<int> * l = new DAL::Loader<int>();
+	DAL::ILoader<int> * l = new Loader<int>();
 	DAL::Reference<int> ref(l);
 	std::cout<<"Pleas enter a number : ";
 	std::cin>>ref;

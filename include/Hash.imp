@@ -1,9 +1,9 @@
 //imp
 template<typename Type>
-std::size_t LoaderHasher<Type>::operator() (Loader<Type> const & l) const{
-	char * ptr = new char[sizeof(Loader<Type>)];
-	memcpy(ptr,&l,sizeof(Loader<Type>));
-	std::string ret = ptrToString(ptr,sizeof(Loader<Type>));
+std::size_t LoaderHasher<Type>::operator() (ILoader<Type> const & l) const{
+	char * ptr = new char[sizeof(l)];
+	memcpy(ptr,&l,sizeof(l));
+	std::string ret = ptrToString(ptr,sizeof(l));
 	delete[] ptr;
 	size_t r = std::hash<std::string>{}(ret);
 	return r;
