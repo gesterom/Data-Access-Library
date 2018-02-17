@@ -16,12 +16,12 @@ namespace DAL{
 	#include "Manager.h"
 	#include "Reference.h"
 	#include "Factory.h"
-	#include "SpecLoader.h"
 
 	//loader injection
 	#ifndef SPECIALIZED_LOADERS_HEADER
 	#error "SPECIALIZED_LOADERS_HEADER must contein path to your header with specialized loaders"
 	#endif
+	
 	#ifdef SPECIALIZED_LOADERS_HEADER
 	#include SPECIALIZED_LOADERS_HEADER
 	#endif

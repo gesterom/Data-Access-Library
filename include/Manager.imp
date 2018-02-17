@@ -3,8 +3,6 @@ template<typename Type>
 void Manager<Type>::decrementReferenceNumber(Loader<Type> & loader){
 	auto it = map.find(loader);
 	if(it==map.end()){
-		for(int i=0;i<map.size();i++){
-		}
 		throw new ThisIsNotPossible("Manager = decrementReferenceNumber");
 	}
 	if(map[loader]->decrementReferenceNumber()==0){
