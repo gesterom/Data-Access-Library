@@ -5,11 +5,11 @@
 
 DAL::Reference<int> getRef(){
 	std::mutex m;
-	DBG(m.lock());
+	m.lock();
 	try{
-		DBG(DAL::ILoader<int> * l = new Loader<int>());
-		DBG(DAL::Reference<int> ref(l));
-		DBG(m.unlock());
+		DAL::ILoader<int> * l = new Loader<int>();
+		DAL::Reference<int> ref(l);
+		m.unlock();
 		return ref;
 	}
 	catch(DAL::ThisIsNotPossible * e){

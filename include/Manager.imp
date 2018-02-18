@@ -7,7 +7,6 @@ void Manager<Type>::decrementReferenceNumber(ILoader<Type> & loader){
 	}
 	if(map[loader.toString()]->decrementReferenceNumber()==0){
 		delete map[loader.toString()];
-		//std::cout<<"DELETE OBJ"<<std::endl;
 		it = map.find(loader.toString());
 		map.erase(it);
 	}
@@ -15,19 +14,11 @@ void Manager<Type>::decrementReferenceNumber(ILoader<Type> & loader){
 }
 template<typename Type>
 void Manager<Type>::incrementReferenceNumber(ILoader<Type> & loader){
-	//std::cout<<"0"<<std::endl;
-	//std::cout<<"to to -===> {  } "<<std::flush;
-	//std::cout<<loader.toString()<<" <====-"<<std::endl;
-	//std::cout<<loader.toString()<<std::endl;
 	auto it = map.find(loader.toString());
-	//std::cout<<"1"<<std::endl;
 	if(it==map.end()){
 		map[loader.toString()] = new Object<Type>();
-		//std::cout<<"2"<<std::endl;
 	}
-	//std::cout<<"3"<<std::endl;
 	map[loader.toString()]->incrementReferenceNumber();
-	//std::cout<<"4"<<std::endl;
 }
 template<typename Type>
 Object<Type> * Manager<Type>::getObject(ILoader<Type> & loader){
