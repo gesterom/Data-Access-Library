@@ -1,9 +1,11 @@
 //imp
-#define DBG(x) {std::cout<<std::this_thread::get_id()<<"\t["<<__FUNCTION__<<" , "<<__LINE__<<" ] \t"<<#x<<std::endl;{x;};}
+#define DBG(x) {std::cout<<std::this_thread::get_id()<<"\t["<<__FUNCTION__<<" , "<<__LINE__<<" ] \t"<<#x<<std::endl;}x;
+#define DB(x) {std::cout<<std::this_thread::get_id()<<"\t["<<__FUNCTION__<<" , "<<__LINE__<<" ] \t"<<#x<<std::endl;}
 template<typename Type>
 Reference<Type>::~Reference(){
+	DB(deconstructor)
 	if(used){
-		object->unlockMutex();
+		DBG(object->unlockMutex());
 	}
 	mMag.lock();
 	manager.decrementReferenceNumber(*loader);
@@ -13,31 +15,60 @@ Reference<Type>::~Reference(){
 template<typename Type>
 Reference<Type>::operator Type&() {
 	if(not used){
-		used=true;
+		DBG(used=true);
 		mMag.lock();
 		this->object = manager.getObject(*this->loader);
 		mMag.unlock();
 	}
-	return this->object->get();
+	DBG(return this->object->get());
 }
 
 template<typename Type>
 Reference<Type>::Reference(ILoader<Type> * loader){
-	this->loader = loader;
+	//std::cout<<"LOADER RAW : {"<<__FUNCTION__<<"} : "<<__LINE__<<" : "<<ptrToString((char*)this->loader,sizeof(*this->loader))<<std::endl;
+	DBG(this->loader = loader);
+	//std::cout<<"LOADER RAW : {"<<__FUNCTION__<<"} : "<<__LINE__<<" : "<<ptrToString((char*)this->loader,sizeof(*this->loader))<<std::endl;
 	mMag.lock();
 	this->manager.incrementReferenceNumber(*loader);
+	//std::cout<<"LOADER RAW : {"<<__FUNCTION__<<"} : "<<__LINE__<<" : "<<ptrToString((char*)this->loader,sizeof(*this->loader))<<std::endl;
 	mMag.unlock();
 }
-
-/*
 template<typename Type>
-void Reference<Type>::operator=(const Type & data){
+Reference<Type>::Reference(const Reference<Type> & other){
+	std::mutex temp;
+	DBG(temp.lock());
+	//std::cout<<"@@@\tLOADER RAW : {"<<__FUNCTION__<<"} : "<<__LINE__<<" : "<<ptrToString((char*)this->loader,sizeof(*this->loader))<<"ADRESS : "<<(long long int)this->loader<<std::endl;
+	//std::cout<<"@@@\tOTHER RAW : {"<<__FUNCTION__<<"} : "<<__LINE__<<" : "<<ptrToString((char*)other.loader,sizeof(*other.loader))<<"ADRESS : "<<(long long int)other.loader<<std::endl; 
+	DBG(*(this->loader) = *(other.loader));
+	//std::cout<<"XXX\tLOADER RAW : {"<<__FUNCTION__<<"} : "<<__LINE__<<" : "<<ptrToString((char*)this->loader,sizeof(*this->loader))<<"ADRESS : "<<(long long int)this->loader<<std::endl;
+	//std::cout<<"XXX\tOTHER RAW : {"<<__FUNCTION__<<"} : "<<__LINE__<<" : "<<ptrToString((char*)other.loader,sizeof(*other.loader))<<"ADRESS : "<<(long long int)other.loader<<std::endl;
+	DBG(mMag.lock());
+	DBG(this->used=false);
+	DBG(this->manager.incrementReferenceNumber(*other.loader));
+	DBG(mMag.unlock());
+	DBG(object = nullptr);
+	DBG(temp.unlock());
+}/*
+template<typename Type>
+Type& Reference<Type>::get(){
 	if(not used){
 		used=true;
 		mMag.lock();
 		this->object = manager.getObject(*this->loader);
 		mMag.unlock();
 	}
+	return this->object->get();
+}*/
+/*
+template<typename Type>
+Reference<Type>& Reference<Type>::operator=(const Type & data){
+	if(not used){
+		used=true;
+		mMag.lock();
+		std::cout<<"LOADER ADRESS : "<<this->loader<<std::endl;
+		this->object = manager.getObject(*this->loader);
+		mMag.unlock();
+	}
 	this->object->get()=data;
-}
-*/
+	return *this;
+}*/

@@ -20,6 +20,7 @@ namespace DAL{
 	#include "Reference.h"
 	#include "Factory.h"
 
+	#include "ByteOperations.h"
 	//imp
 	#include "Object.imp"
 	#include "Reference.imp"
