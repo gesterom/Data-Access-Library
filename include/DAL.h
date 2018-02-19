@@ -12,6 +12,9 @@
 #include <thread>
 
 namespace DAL{
+#define DBG(x) {std::cout<<std::this_thread::get_id()<<"\t["<<__FUNCTION__<<" , "<<__LINE__<<" ] \t \""<<__FILE__<<"\"\t"<<#x<<std::endl;}x;
+#define DB(x) {std::cout<<std::this_thread::get_id()<<"\t["<<__FUNCTION__<<" , "<<__LINE__<<" ] \t"<<#x<<std::endl;}
+#define DBG_VAR(x) {std::cout<<#x<<"\t A[ "<<x<<" ]"<<std::endl;}
 	//def
 	#include "Exeptions.h"
 	#include "Object.h"

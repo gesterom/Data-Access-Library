@@ -10,4 +10,5 @@ class Manager final{
 	virtual ~Manager(){}
 	private:
 	std::unordered_map< std::string , Object<Type>* > map;
+	std::mutex mMag;
 };

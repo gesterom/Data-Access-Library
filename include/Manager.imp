@@ -1,6 +1,7 @@
 //imp
 template<typename Type>
 void Manager<Type>::decrementReferenceNumber(ILoader<Type> & loader){
+	std::lock_guard<std::mutex> lock(mMag);
 	auto it = map.find(loader.toString());
 	if(it==map.end()){
 		throw new ThisIsNotPossible("Manager = decrementReferenceNumber");
@@ -14,6 +15,7 @@ void Manager<Type>::decrementReferenceNumber(ILoader<Type> & loader){
 }
 template<typename Type>
 void Manager<Type>::incrementReferenceNumber(ILoader<Type> & loader){
+	std::lock_guard<std::mutex> lock(mMag);
 	auto it = map.find(loader.toString());
 	if(it==map.end()){
 		map[loader.toString()] = new Object<Type>();
@@ -22,6 +24,7 @@ void Manager<Type>::incrementReferenceNumber(ILoader<Type> & loader){
 }
 template<typename Type>
 Object<Type> * Manager<Type>::getObject(ILoader<Type> & loader){
+	std::lock_guard<std::mutex> lock(mMag);
 	auto it = map.find(loader.toString());
 	if(it==map.end()){
 		throw new ThisIsNotPossible("getObject");

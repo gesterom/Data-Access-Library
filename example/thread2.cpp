@@ -8,8 +8,10 @@ DAL::Reference<int> getRef(){
 	m.lock();
 	try{
 		DAL::ILoader<int> * l = new Loader<int>();
+		std::cout<<"crt func?"<<std::endl;
 		DAL::Reference<int> ref(l);
 		m.unlock();
+		std::cout<<"maybe"<<std::endl;
 		return ref;
 	}
 	catch(DAL::ThisIsNotPossible * e){
@@ -21,7 +23,7 @@ DAL::Reference<int> getRef(){
 int func1(){
 	try{
 		auto ref = getRef();
-		//ref=10;
+		ref.get()=ref.get()*10;
 		std::cout<<"func 1:) I hava a obj :) ref = "<<ref<<std::endl;
 		std::cout<<"func 1: i wait"<<std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -36,9 +38,9 @@ int func1(){
 int func2(){
 	try{
 		auto ref = getRef();
-		//ref+=255;
+		ref.get()=255+ref.get();
 		std::cout<<"func1 and func2 have the same loader so Reference<int> points the same int"<<std::endl;
-		std::cout<<"func 2:) I hava a obj :) ref = "<<ref<<std::endl;
+		std::cout<<"func 2:) I hava a obj :) ref = "<<ref.get()<<std::endl;
 		std::this_thread::sleep_for(std::chrono::seconds(5));
 		return 0;
 	}
@@ -53,11 +55,11 @@ int main(){
 	try{
 	func1();
 	func2();
-	//std::thread t1(func1);
-	//std::thread t2(func2);
+	std::thread t1(func1);
+	std::thread t2(func2);
 
-	//t1.join();
-	//t2.join();	
+	t1.join();
+	t2.join();	
 	std::cout<<"end"<<std::endl;
 	}
 	catch(std::exception & e){

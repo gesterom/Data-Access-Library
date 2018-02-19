@@ -4,7 +4,7 @@ template<typename Type>
 class Object final{
 	int32_t referenceNumber=0;
 	Type * data;
-	std::mutex m;
+	std::recursive_mutex m;
 	bool loaded=false;
 	public:
 	Object();

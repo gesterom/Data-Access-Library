@@ -6,14 +6,13 @@ class Reference final{
 	Reference(ILoader<Type> * loader);
 	Reference(const Reference<Type> & other);
 	operator Type&() ;
-	/*Type & get();
-	Reference<Type>& operator=(const Type & data);*/
+	Type & get();
+	Reference<Type>& operator=(const Type & data);
 	~Reference();
 	private:
 	Object<Type> * object;
 	ILoader<Type> * loader;
 	bool	used=false;
-	std::mutex mMag;
 	static Manager<Type> manager; //FIXME ?
 };
 
