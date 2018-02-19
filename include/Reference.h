@@ -12,7 +12,7 @@ class Reference final{
 	private:
 	Object<Type> * object;
 	ILoader<Type> * loader;
-	bool	used=false;
+	bool	haveObject=false;
 	static Manager<Type> manager; //FIXME ?
 };
 

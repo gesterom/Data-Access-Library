@@ -26,9 +26,9 @@ Reference<Type>::Reference(const Reference<Type> & other){
 template<typename Type>
 Type& Reference<Type>::get(){
 	if(not haveObject){
-		used=true;
+		haveObject=true;
 		this->object = manager.getObject(*this->loader);
-		this->object.lockMutex();
+		this->object->lockMutex();
 	}
 	return this->object->get();
 }

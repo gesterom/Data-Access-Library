@@ -25,7 +25,7 @@ namespace DAL{
 
 	#include "ByteOperations.h"
 	//imp
-	#include "Object.imp"
-	#include "Reference.imp"
-	#include "Manager.imp"
+	#include "Object.cpp"
+	#include "Reference.cpp"
+	#include "Manager.cpp"
 };
