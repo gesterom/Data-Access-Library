@@ -9,13 +9,14 @@ class Reference final{
 	Reference(const Reference<Type> & other);
 	operator Type&() ;
 	Type & get();
+	Type* operator->() ;
 	Reference<Type>& operator=(const Type & data);
 	~Reference();
 	private:
 	Object<Type> * object;
 	ILoader<Type> * loader;
 	bool	haveObject=false;
-	static Manager<Type> manager; //FIXME ?
+	static Manager<Type> manager; 
 };
 
 template<typename Type>

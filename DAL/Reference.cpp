@@ -41,3 +41,7 @@ Reference<Type>& Reference<Type>::operator=(const Type & data){
 	this->get()=data;
 	return *this;
 }
+template<typename Type>
+Type* Reference<Type>::operator->(){
+	return &(this->get());
+}
