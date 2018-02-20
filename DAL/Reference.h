@@ -9,7 +9,7 @@ class Reference final{
 	Reference(const Reference<Type> & other);
 	operator Type&() ;
 	Type & get();
-	Type* operator->() ;
+	Type* operator->();
 	Type& operator*();
 	Reference<Type>& operator=(const Type & data);
 	~Reference();
