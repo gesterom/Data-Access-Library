@@ -18,7 +18,7 @@ pre-build:
 post-build: main-build
 	@echo "DONE"
 
-main-build: pre-build
+main-build: pre-build bin
 	@$(MAKE) --no-print-directory $(TARGET_EXEC)
 
 $(TARGET_EXEC) : $(SOURCE)
@@ -29,3 +29,6 @@ $(TARGET_EXEC) : $(SOURCE)
 rebuild:
 	rm ./bin/* || true
 	@$(MAKE) --no-print-directory all
+
+bin:
+	mkdir ./bin/
