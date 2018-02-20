@@ -3,7 +3,9 @@
 template<typename Type>
 class Reference final{
 	public:
+	Reference() = delete;
 	Reference(ILoader<Type> * loader);
+	//Reference(ILoader<Type> * loader,const Type& value);
 	Reference(const Reference<Type> & other);
 	operator Type&() ;
 	Type & get();

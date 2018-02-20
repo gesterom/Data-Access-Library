@@ -1,23 +1,14 @@
 #include <thread>
 #include <chrono>
-#include "../include/DAL.h"
+#include "../DAL/DAL.h"
 #include "SpecLoader.h"
 
 DAL::Reference<int> getRef(){
 	std::mutex m;
 	m.lock();
-	try{
-		DAL::ILoader<int> * l = new Loader<int>();
-		std::cout<<"crt func?"<<std::endl;
-		DAL::Reference<int> ref(l);
-		m.unlock();
-		std::cout<<"maybe"<<std::endl;
-		return ref;
-	}
-	catch(DAL::ThisIsNotPossible * e){
-		std::cout<<"============================"<<e->get()<<std::endl<<"============================"<<std::endl;
-	}
-	
+	DAL::Reference<int> ref(new Loader<int>());
+	m.unlock();
+	return ref;
 }
 
 int func1(){

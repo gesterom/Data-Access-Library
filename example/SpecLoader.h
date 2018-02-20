@@ -1,5 +1,5 @@
 #pragma once
-#include "../include/DAL.h"
+#include "../DAL/DAL.h"
 
 template <typename Type>
 class Loader : public DAL::ILoader<Type>

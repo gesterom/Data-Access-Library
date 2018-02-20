@@ -18,7 +18,7 @@ void Object<Type>::unlockMutex(){
 		throw new ThisIsNotPossible("unlockMutex");
 	if(referenceNumber==0)
 		throw new ThisIsNotPossible("NullReference");
-	DBG(m.unlock());
+	m.unlock();
 }
 template<typename Type>
 void Object<Type>::lockMutex(){
@@ -26,7 +26,7 @@ void Object<Type>::lockMutex(){
 		throw new ThisIsNotPossible("unlockMutex");
 	if(referenceNumber==0)
 		throw new ThisIsNotPossible("NullReference");
-    DBG(m.lock());
+    m.lock();
 }
 
 template<typename Type>

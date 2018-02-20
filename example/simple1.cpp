@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "../include/DAL.h"
+#include "../DAL/DAL.h"
 #include "SpecLoader.h"
 
 int main(){

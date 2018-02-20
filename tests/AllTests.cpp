@@ -1,9 +1,7 @@
 #include <gtest/gtest.h>
 #include "DAL.h"
-
-TEST(NNNN,addsuperduperTest){
-	SUCCEED();
-}
+#include "./SpecLoader.h"
+#include "get_test.cpp"
 
 int main(int argv, char** args){
     testing::InitGoogleTest(&argv, args);
