@@ -75,7 +75,7 @@ class Factory{ //very usefull in this case
 
 void printOfBalance(Factory f, int id){ //Bisnese logic (very very simple)
 	auto user = f.getNewReferenecToUser(id); //you dont need database connection or anythings ;) (no more to identify user)
-	std::cout<<"User ["<<id<<"] Balace is :"<<user->getBalance()<<" $ Name is : "<<user->getName()<<std::endl;
+	std::cout<<"User ["<<id<<"] Balace is :"<<(*user).getBalance()<<" $ Name is : "<<(*user).getName()<<std::endl;
 }
 
 int main(){

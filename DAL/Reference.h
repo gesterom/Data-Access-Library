@@ -10,6 +10,7 @@ class Reference final{
 	operator Type&() ;
 	Type & get();
 	Type* operator->() ;
+	Type& operator*();
 	Reference<Type>& operator=(const Type & data);
 	~Reference();
 	private:

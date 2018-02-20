@@ -32,3 +32,4 @@ rebuild:
 
 bin:
 	mkdir ./bin/
+	cp ./example/*.data ./bin/

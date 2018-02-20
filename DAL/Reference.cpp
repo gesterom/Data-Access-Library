@@ -45,3 +45,7 @@ template<typename Type>
 Type* Reference<Type>::operator->(){
 	return &(this->get());
 }
+template<typename Type>
+Type& Reference<Type>::operator*(){
+	return this->get();
+}
