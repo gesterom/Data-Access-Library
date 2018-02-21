@@ -20,7 +20,7 @@ Reference<Type>::Reference(ILoader<Type> * loader){
 }
 template<typename Type>
 Reference<Type>::Reference(const Reference<Type> & other){
-	this->loader=other.loader->getNewPtrToCopyOfThisLader();
+	this->loader=other.loader->getCopyPtr();
 	this->manager.incrementReferenceNumber(*loader);
 }
 template<typename Type>

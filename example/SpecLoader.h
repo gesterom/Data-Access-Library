@@ -18,7 +18,7 @@ class Loader : public DAL::ILoader<Type>
 		std::cout<<"not implemented"<<std::flush<<std::endl;
 		throw new DAL::NotImplemented("Loader toString");
 	}
-	virtual DAL::ILoader<Type> * getNewPtrToCopyOfThisLader()const{
+	virtual DAL::ILoader<Type> * getCopyPtr()const{
 		std::cout<<"not implemented"<<std::flush<<std::endl;
 		throw new DAL::NotImplemented("ILoader =====");
 	}
@@ -39,7 +39,7 @@ class Loader <int> : public DAL::ILoader<int>
 		this->alabama = other.alabama;
 	}
 	virtual int * load() override {return new int;}
-	virtual DAL::ILoader<int>* getNewPtrToCopyOfThisLader()const{
+	virtual DAL::ILoader<int>* getCopyPtr()const{
 		Loader<int> * ret = new Loader<int>();
 		ret->value = this->value;
 		ret->alabama=this->alabama;

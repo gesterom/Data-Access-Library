@@ -52,7 +52,7 @@ class Loader <User> : public DAL::ILoader<User>{
 						// so we propone to this func return value witch you get from constructor
 		return toString_ret; // smal optimalization for so much call of this function
 	}
-	virtual DAL::ILoader<User> * getNewPtrToCopyOfThisLader()const { //this function is used in copy constructor of Reference
+	virtual DAL::ILoader<User> * getCopyPtr()const { //this function is used in copy constructor of Reference
 		return new Loader<User>(this->path,this->m_id);
 	}
 	virtual ~Loader(){}
@@ -65,14 +65,14 @@ class Factory{ //very usefull in this case
 	std::string name;
 	public:
 	Factory(std::string nameOfFile) : name(nameOfFile){}
-	DAL::Reference<User> getNewReferenecToUser(int id){
+	DAL::Reference<User> getNewReferenceUser(int id){
 		return DAL::Reference<User>(new Loader<User>(name,id)); // this is all 
 						 // but we propone to use template class factory for generic name ;) 
 	}
 };
 
 void printOfBalance(Factory f, int id){ //business logic (very very simple)
-	auto user = f.getNewReferenecToUser(id); //you dont need database connection or anythings ;) (no more to identify user)
+	auto user = f.getNewReferenceUser(id); //you dont need database connection or anythings ;) (no more to identify user)
 	std::cout<<"User ["<<id<<"] Balace is :"<<(*user).getBalance()<<" $ Name is : "<<(*user).getName()<<std::endl;
 }
 

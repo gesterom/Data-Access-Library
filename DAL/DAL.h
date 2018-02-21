@@ -21,9 +21,7 @@ namespace DAL{
 	#include "ILoader.h"
 	#include "Manager.h"
 	#include "Reference.h"
-	#include "Factory.h"
 
-	#include "ByteOperations.h"
 	//imp
 	#include "Object.cpp"
 	#include "Reference.cpp"
