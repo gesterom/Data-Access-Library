@@ -1,6 +1,6 @@
 #pragma once
 #include "../DAL/DAL.h"
-
+#include <fstream>
 template <typename Type>
 class Loader : public DAL::ILoader<Type>
 {
@@ -24,30 +24,51 @@ class Loader : public DAL::ILoader<Type>
 	}
 };
 
+template <typename Type>
+class Updater: public DAL::IUpdater<Type>
+{
+	public:
+	Updater(){}
+	virtual void update(Type&){}
+	virtual DAL::IUpdater<Type> * getCopyPtr()const{}
+};
+
 template <>
 class Loader <int> : public DAL::ILoader<int>
 {
-	int value;
-	int alabama;
+	std::string name;
 	public:
-	Loader(){
-		value= 0xAAAABBBB;
-		alabama= 0xefcdab89;
-	}
+	Loader(std::string filename) : name(filename){}
 	Loader(const Loader<int> & other){
-		this->value = other.value;
-		this->alabama = other.alabama;
+		this->name = other.name;
 	}
-	virtual int * load() override {return new int;}
+	virtual int * load() override {
+		std::ifstream file(name);
+		int * temp = new int;
+		file>>*temp;
+		return temp;
+	}
 	virtual DAL::ILoader<int>* getCopyPtr()const{
-		Loader<int> * ret = new Loader<int>();
-		ret->value = this->value;
-		ret->alabama=this->alabama;
-		return ret;
+		return new Loader<int>(name);
 	}
 	virtual std::string toString() override {
 		return "0";
 	}
 	virtual ~Loader(){
+	}
+};
+
+template <>
+class Updater<int> : public DAL::IUpdater<int>
+{
+	std::string name;
+	public:
+	Updater(std::string filename) : name(filename) {}
+	virtual void update(int & a) {
+		std::ofstream file(name);
+		file<<a;
+	} 
+	virtual IUpdater<int> * getCopyPtr()const{
+		return new Updater(name);
 	}
 };

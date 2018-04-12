@@ -22,6 +22,9 @@ class User{
 template<typename Type>
 class Loader{};
 
+template<typename Type>
+class Updater{};
+
 //loader(builder) to create instance of my class(User)
 template<>
 class Loader <User> : public DAL::ILoader<User>{
@@ -58,6 +61,19 @@ class Loader <User> : public DAL::ILoader<User>{
 	virtual ~Loader(){}
 };
 
+template <>
+class Updater : public DAL::IUpdater<User>
+{
+	std::string _path;
+	int _id;
+	public:
+
+	Updater(std::string path,int id) : _path(path), _id(id) {}
+	virtual void update(User & u){
+		
+	}
+	~Updater();
+};
 
 class Factory{ //very usefull in this case
 			//you dont need database connection in business logic or in this case filename of database
@@ -66,7 +82,7 @@ class Factory{ //very usefull in this case
 	public:
 	Factory(std::string nameOfFile) : name(nameOfFile){}
 	DAL::Reference<User> getNewReferenceUser(int id){
-		return DAL::Reference<User>(new Loader<User>(name,id)); // this is all 
+		return DAL::Reference<User>(new Loader<User>(name,id),new Updater<User>(name,id)); // this is all 
 						 // but we propone to use template class factory for generic name ;) 
 	}
 };

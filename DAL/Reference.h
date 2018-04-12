@@ -3,19 +3,31 @@
 template<typename Type>
 class Reference final{
 	public:
-	Reference() = delete;
-	Reference(ILoader<Type> * loader);
-	//Reference(ILoader<Type> * loader,const Type& value);
+	//constructors
+	Reference();
+	Reference<Type>& init(ILoader<Type> * loader,IUpdater<Type> * updater);
+	Reference(ILoader<Type> * loader,IUpdater<Type> * updater);
 	Reference(const Reference<Type> & other);
-	operator Type&() ;
+	Reference(Reference<Type> && other);
+	Reference<Type>& operator=(const Reference<Type> & other);
+	Reference<Type>& operator=(Reference<Type> && other);
+
+	//geters
 	Type & get();
 	Type* operator->();
 	Type& operator*();
-	Reference<Type>& operator=(const Type & data);
+	operator Type&() ;
+
+	//operators
+	
+
 	~Reference();
+
+	//members
 	private:
 	Object<Type> * object;
 	ILoader<Type> * loader;
+	IUpdater<Type> * updater;
 	bool	haveObject=false;
 	static Manager<Type> manager; 
 };

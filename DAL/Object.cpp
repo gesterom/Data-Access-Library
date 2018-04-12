@@ -10,7 +10,7 @@ void Object<Type>::setRawPointer(Type * dataPtr){
 		throw new ThisIsNotPossible("setRawPointer");
 	}
 	loaded = true ;
-	data=dataPtr;;
+	data=dataPtr;
 }
 template<typename Type>
 void Object<Type>::unlockMutex(){
