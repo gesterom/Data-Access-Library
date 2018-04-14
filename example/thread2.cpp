@@ -6,7 +6,7 @@
 DAL::Reference<int> getRef(){
 	std::mutex m;
 	m.lock();
-	DAL::Reference<int> ref(new Loader<int>());
+	DAL::Reference<int> ref(new Loader<int>("th2.int"),new Updater<int>("th2.int"));
 	m.unlock();
 	return ref;
 }

@@ -22,6 +22,7 @@ namespace DAL{
 	#include "IUpdater.h"
 	#include "Manager.h"
 	#include "Reference.h"
+	#include "Domain.h"
 
 	//imp
 	#include "Object.cpp"

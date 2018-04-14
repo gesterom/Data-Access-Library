@@ -62,7 +62,7 @@ class Loader <User> : public DAL::ILoader<User>{
 };
 
 template <>
-class Updater : public DAL::IUpdater<User>
+class Updater<User> : public DAL::IUpdater<User>
 {
 	std::string _path;
 	int _id;
@@ -70,9 +70,12 @@ class Updater : public DAL::IUpdater<User>
 
 	Updater(std::string path,int id) : _path(path), _id(id) {}
 	virtual void update(User & u){
-		
+
 	}
-	~Updater();
+	virtual DAL::IUpdater<User> * getCopyPtr()const{
+		return new Updater<User>(_path,_id);
+	}
+	virtual ~Updater(){}
 };
 
 class Factory{ //very usefull in this case
