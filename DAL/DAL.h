@@ -18,8 +18,7 @@ namespace DAL {
 	//def
 #include "Exception.h"
 #include "Object.h"
-#include "ILoader.h"
-#include "IUpdater.h"
+#include "IAccessOperator.h"
 #include "Manager.h"
 #include "Reference.h"
 #include "Domain.h"

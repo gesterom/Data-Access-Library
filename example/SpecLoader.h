@@ -25,7 +25,7 @@ class Loader <int> : public DAL::ILoader<int> {
 		return new Loader<int>( name );
 	}
 	virtual std::string toString() override {
-		return "0";
+		return name;
 	}
 	virtual ~Loader() {
 	}

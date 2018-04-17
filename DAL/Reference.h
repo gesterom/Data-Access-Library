@@ -5,8 +5,8 @@ class Reference final {
   public:
 	//constructors
 	Reference();
-	Reference<Type>& init( ILoader<Type>* loader, IUpdater<Type>* updater );
-	Reference( ILoader<Type>* loader, IUpdater<Type>* updater );
+	Reference<Type>& init( IAccessOperator<Type>* access);
+	Reference( IAccessOperator<Type>* loader);
 	Reference( const Reference<Type>& other );
 	Reference( Reference<Type>&& other );
 	Reference<Type>& operator=( const Reference<Type>& other );
@@ -26,8 +26,7 @@ class Reference final {
 	//members
   private:
 	Object<Type>* object;
-	ILoader<Type>* loader;
-	IUpdater<Type>* updater;
+	IAccessOperator<Type>* access;
 	bool	haveObject = false;
 	static Manager<Type> manager;
 };

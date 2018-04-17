@@ -1,43 +1,43 @@
 //imp
 template<typename Type>
-void Manager<Type>::decrementReferenceNumber( ILoader<Type>& loader ) {
+void Manager<Type>::decrementReferenceNumber( IAccessOperator<Type>& access ) {
 	std::lock_guard<std::mutex> lock( mMag );
-	auto it = map.find( loader.toString() );
+	auto it = map.find( access.toString() );
 
 	if( it == map.end() ) {
 		throw new ThisIsNotPossible( "Manager = decrementReferenceNumber" );
 	}
 
-	if( map[loader.toString()]->decrementReferenceNumber() == 0 ) {
-		delete map[loader.toString()];
-		it = map.find( loader.toString() );
+	if( map[access.toString()]->decrementReferenceNumber() == 0 ) {
+		delete map[access.toString()];
+		it = map.find( access.toString() );
 		map.erase( it );
 	}
 
 }
 template<typename Type>
-void Manager<Type>::incrementReferenceNumber( ILoader<Type>& loader ) {
+void Manager<Type>::incrementReferenceNumber( IAccessOperator<Type>& access ) {
 	std::lock_guard<std::mutex> lock( mMag );
-	auto it = map.find( loader.toString() );
+	auto it = map.find( access.toString() );
 
 	if( it == map.end() ) {
-		map[loader.toString()] = new Object<Type>();
+		map[access.toString()] = new Object<Type>();
 	}
 
-	map[loader.toString()]->incrementReferenceNumber();
+	map[access.toString()]->incrementReferenceNumber();
 }
 template<typename Type>
-Object<Type>* Manager<Type>::getObject( ILoader<Type>& loader ) {
+Object<Type>* Manager<Type>::getObject( IAccessOperator<Type>& access ) {
 	std::lock_guard<std::mutex> lock( mMag );
-	auto it = map.find( loader.toString() );
+	auto it = map.find( access.toString() );
 
 	if( it == map.end() ) {
 		throw new ThisIsNotPossible( "getObject" );
 	}
 
-	if( not map[loader.toString()]->isLoaded() ) {
-		map[loader.toString()]->setRawPointer( loader.load() );
+	if( not map[access.toString()]->isLoaded() ) {
+		map[access.toString()]->setRawPointer( access.load() );
 	}
 
-	return map[loader.toString()];
+	return map[access.toString()];
 }

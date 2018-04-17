@@ -2,60 +2,61 @@
 
 template<typename Type>
 Reference<Type>::Reference() {
-	this->object = nullptr;
-	this->loader = nullptr;
+	this->access = nullptr;
 }
 template<typename Type>
-Reference<Type>& Reference<Type>::init( ILoader<Type>* loader, IUpdater<Type>* updater ) {
-	this->loader = loader;
-	this->updater = updater;
-	this->manager.incrementReferenceNumber( *loader );
+Reference<Type>& Reference<Type>::init( IAccessOperator<Type>* access ) {
+	this->access = access;
+	this->manager.incrementReferenceNumber( *access );
 }
 template<typename Type>
-Reference<Type>::Reference( ILoader<Type>* loader, IUpdater<Type>* updater ) {
-	this->loader = loader;
-	this->updater = updater;
-	this->manager.incrementReferenceNumber( *loader );
+Reference<Type>::Reference( IAccessOperator<Type>* access) {
+	this->access = access;
+	this->manager.incrementReferenceNumber( *access );
 }
 //copy
 template<typename Type>
 Reference<Type>::Reference( const Reference<Type>& other ) {
-	this->loader = other.loader->getCopyPtr();
+	this->access = other.access->getCopyPtr();
 	this->manager.incrementReferenceNumber( *loader );
 }
 //move
 template<typename Type>
 Reference<Type>::Reference( Reference<Type>&& other ) {
-	this->object = other.object;
-	this->loader = other.loader;
-	this->haveObject = other.haveObject;
+	if(this!=other){
+		this->object = other.object;
+		this->access = other.access;
+		this->haveObject = other.haveObject;
 
-	other.object = nullptr;
-	other.loader = nullptr;
-	other.haveObject = false;
+		other.object = nullptr;
+		other.access = nullptr;
+		other.haveObject = false;
+	}
 }
 //copy
 template<typename Type>
 Reference<Type>& Reference<Type>::operator=( const Reference<Type>& other ) {
-	this->loader = other.loader->getCopyPtr();
-	this->manager.incrementReferenceNumber( *loader );
+	this->access = other.access->getCopyPtr();
+	this->manager.incrementReferenceNumber( *access );
 }
 //move
 template<typename Type>
 Reference<Type>& Reference<Type>::operator=( Reference<Type>&& other ) {
-	this->object = other.object;
-	this->loader = other.loader;
-	this->haveObject = other.haveObject;
+	if(this!=other){
+		this->object = other.object;
+		this->access = other.access;
+		this->haveObject = other.haveObject;
 
-	other.object = nullptr;
-	other.loader = nullptr;
-	other.haveObject = false;
+		other.object = nullptr;
+		other.access = nullptr;
+		other.haveObject = false;
+	}
 }
 //===============================================================================
 //geters
 template<typename Type>
 Type& Reference<Type>::get() {
-	if( loader == nullptr or updater == nullptr ) {
+	if( access == nullptr ) {
 		throw new NullReferenceException();
 	}
 
@@ -107,7 +108,7 @@ Reference<Type>::~Reference() {
 		object->unlockMutex();
 	}
 
-	manager.decrementReferenceNumber( *loader );
-	delete loader;
+	manager.decrementReferenceNumber( *access );
+	delete access;
 }
 
