@@ -18,7 +18,7 @@ Reference<Type>::Reference( IAccessOperator<Type>* access) {
 template<typename Type>
 Reference<Type>::Reference( const Reference<Type>& other ) {
 	this->access = other.access->getCopyPtr();
-	this->manager.incrementReferenceNumber( *loader );
+	this->manager.incrementReferenceNumber( *access );
 }
 //move
 template<typename Type>
@@ -62,7 +62,7 @@ Type& Reference<Type>::get() {
 
 	if( not haveObject ) {
 		haveObject = true;
-		this->object = manager.getObject( *this->loader );
+		this->object = manager.getObject( *this->access );
 		this->object->lockMutex();
 	}
 
