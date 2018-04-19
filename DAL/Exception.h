@@ -20,7 +20,7 @@ class ThisIsNotPossible : public std::exception {
 	std::string msg;
   public:
 	ThisIsNotPossible( std::string name ) : msg( name ) {
-		std::cout << msg << std::endl;
+		//std::cout << msg << std::endl;
 	}
 	std::string get() {
 		return msg;

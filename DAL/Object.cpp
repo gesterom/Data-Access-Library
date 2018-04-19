@@ -31,7 +31,7 @@ void Object<Type>::unlockMutex() {
 template<typename Type>
 void Object<Type>::lockMutex() {
 	if( not loaded ) {
-		throw new ThisIsNotPossible( "unlockMutex" );
+		throw new ThisIsNotPossible( "lockMutex" );
 	}
 
 	if( referenceNumber == 0 ) {
@@ -56,7 +56,7 @@ int32_t Object<Type>::decrementReferenceNumber() {
 
 template<typename Type>
 Object<Type>::~Object() {
-	/*DBG(m.unlock());*/delete data;
+	delete data;
 }
 
 template<typename Type>

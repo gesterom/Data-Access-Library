@@ -34,9 +34,9 @@ Object<Type>* Manager<Type>::getObject( IAccessOperator<Type>& access ) {
 	if( it == map.end() ) {
 		throw new ThisIsNotPossible( "getObject" );
 	}
-
 	if( not map[access.toString()]->isLoaded() ) {
-		map[access.toString()]->setRawPointer( access.load() );
+		Type * t = access.load();
+		map[access.toString()]->setRawPointer( t );
 	}
 
 	return map[access.toString()];

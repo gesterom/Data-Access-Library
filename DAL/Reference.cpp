@@ -23,7 +23,7 @@ Reference<Type>::Reference( const Reference<Type>& other ) {
 //move
 template<typename Type>
 Reference<Type>::Reference( Reference<Type>&& other ) {
-	if(this!=other){
+	if(this!=&other){
 		this->object = other.object;
 		this->access = other.access;
 		this->haveObject = other.haveObject;
@@ -42,7 +42,7 @@ Reference<Type>& Reference<Type>::operator=( const Reference<Type>& other ) {
 //move
 template<typename Type>
 Reference<Type>& Reference<Type>::operator=( Reference<Type>&& other ) {
-	if(this!=other){
+	if(this!=&other){
 		this->object = other.object;
 		this->access = other.access;
 		this->haveObject = other.haveObject;
@@ -62,7 +62,7 @@ Type& Reference<Type>::get() {
 
 	if( not haveObject ) {
 		haveObject = true;
-		this->object = manager.getObject( *this->access );
+		this->object = manager.getObject( *access );
 		this->object->lockMutex();
 	}
 
@@ -70,7 +70,7 @@ Type& Reference<Type>::get() {
 }
 template<typename Type>
 Type* Reference<Type>::operator->() {
-	return &( this->get() );
+	return &(this->get());
 }
 template<typename Type>
 Type& Reference<Type>::operator*() {
@@ -104,7 +104,7 @@ Reference<Type>::operator Type& () {
 template<typename Type>
 Reference<Type>::~Reference() {
 	if( haveObject ) {
-		this->updater->update( this->object->get() );
+		this->access->update( this->object->get() );
 		object->unlockMutex();
 	}
 
